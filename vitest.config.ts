@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "vite";                  // ⬅️ тут меняем vitest/config на vite
+import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react-swc";
 
 export default defineConfig({
