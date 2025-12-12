@@ -73,3 +73,38 @@ export const useRecipes = (query: string) => {
 
     return { recipes, loading, error };
 };
+
+export const useRandomRecipe = () => {
+    const [recipe, setRecipe] = useState<Recipe | null>(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const fetchRandomRecipe = async () => {
+        try {
+            setLoading(true);
+            setError(null);
+
+            const url = `${BASE_URL}/random.php`;
+            const res = await fetch(url);
+
+            if (!res.ok) {
+                throw new Error("Failed to fetch random recipe");
+            }
+
+            const data = await res.json();
+            const meal: ApiRecipe | null = data.meals?.[0];
+
+            if (!meal) {
+                throw new Error("No recipe found");
+            }
+
+            setRecipe(mapApiRecipe(meal));
+        } catch (err: unknown) {
+            setError((err as Error).message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return { recipe, loading, error, fetchRandomRecipe };
+};

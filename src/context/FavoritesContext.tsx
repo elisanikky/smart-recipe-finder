@@ -6,6 +6,7 @@ interface FavoritesContextValue {
     favorites: Recipe[];
     toggleFavorite: (recipe: Recipe) => void;
     isFavorite: (id: string) => boolean;
+    clearAllFavorites: () => void;
 }
 
 const FAVORITES_STORAGE_KEY = "smart-recipe-finder-favorites";
@@ -52,8 +53,12 @@ export const FavoritesProvider: React.FC<{ children: ReactNode }> = ({ children 
 
     const isFavorite = (id: string) => favorites.some((r) => r.id === id);
 
+    const clearAllFavorites = () => {
+        setFavorites([]);
+    };
+
     return (
-        <FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite }}>
+        <FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite, clearAllFavorites }}>
             {children}
         </FavoritesContext.Provider>
     );

@@ -15,9 +15,13 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onOpen }) => {
             <img src={recipe.thumbnail} alt={recipe.name} />
             <div className="recipe-card-body">
                 <h3>{recipe.name}</h3>
-                <p className="recipe-meta">
-                    {recipe.category} · {recipe.area}
-                </p>
+                <div className="recipe-tags">
+                    <span className="recipe-tag category-tag">{recipe.category}</span>
+                    <span className="recipe-tag area-tag">{recipe.area}</span>
+                    <span className="recipe-tag ingredient-count">
+                        {recipe.ingredients.length} ingredients
+                    </span>
+                </div>
                 <div className="recipe-actions">
                     <button type="button" onClick={onOpen}>
                         View details

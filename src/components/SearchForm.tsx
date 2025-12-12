@@ -21,7 +21,7 @@ export const SearchForm: React.FC<SearchFormProps> = ({
             <input
                 name="query"
                 defaultValue={initialQuery}
-                placeholder="Type a meal name (e.g. chicken)..."
+                placeholder="Search recipes, ingredients, cuisine..."
             />
             <button type="submit">Search</button>
         </form>
