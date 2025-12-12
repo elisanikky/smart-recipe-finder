@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
 import type { Recipe } from "../types/recipe";
 
@@ -8,12 +8,39 @@ interface FavoritesContextValue {
     isFavorite: (id: string) => boolean;
 }
 
+const FAVORITES_STORAGE_KEY = "smart-recipe-finder-favorites";
+
 const FavoritesContext = createContext<FavoritesContextValue | undefined>(
     undefined
 );
 
+// Function to load favorites from localStorage
+const loadFavoritesFromStorage = (): Recipe[] => {
+    try {
+        const stored = localStorage.getItem(FAVORITES_STORAGE_KEY);
+        return stored ? JSON.parse(stored) : [];
+    } catch (error) {
+        console.error("Error loading favorites from localStorage:", error);
+        return [];
+    }
+};
+
+// Function to save favorites to localStorage
+const saveFavoritesToStorage = (favorites: Recipe[]): void => {
+    try {
+        localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favorites));
+    } catch (error) {
+        console.error("Error saving favorites to localStorage:", error);
+    }
+};
+
 export const FavoritesProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [favorites, setFavorites] = useState<Recipe[]>([]);
+    const [favorites, setFavorites] = useState<Recipe[]>(loadFavoritesFromStorage);
+
+    // Save favorites to localStorage whenever they change
+    useEffect(() => {
+        saveFavoritesToStorage(favorites);
+    }, [favorites]);
 
     const toggleFavorite = (recipe: Recipe) => {
         setFavorites((prev) =>
