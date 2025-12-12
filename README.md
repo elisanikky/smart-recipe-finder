@@ -6,6 +6,44 @@ Smart Recipe Finder is a responsive web application that helps users discover re
 
 Polina Averkova, Julia Naguib, Elizaveta Voropaeva
 
+## Features
+
+-  Search recipes by main ingredient
+
+-  Search random recipe
+
+-  View recipe details: ingredients and cooking process
+
+-  Add and remove recipes from favourites
+
+## Project Structure
+
+```text
+src/
+  components/       # Reusable UI components
+  context/          # React Context for favourites
+  hooks/            # Custom hooks (data fetching)
+  styles/           # Application styles
+  tests/            # Unit tests
+  types/            # TypeScript interfaces and types
+  
+```
+# Getting Started
+## Prerequisites
+
+Before running the project, make sure you have installed:
+
+- Node.js (version 18 or higher)
+
+- npm
+
+## Environment Variables
+
+This project uses TheMealDB API which is public and requires no authentication. All API calls are made to the public endpoint:
+`https://www.themealdb.com/api/json/v1/1/`
+
+No environment variables are required for basic functionality.
+
 ## Build and run instructions
 
 Follow these steps to set up the project locally:
@@ -15,9 +53,24 @@ cd smart-recipe-finder
 npm install
 npm run dev
 ```
-## Environment Variables
+## Run tests
 
-This project uses TheMealDB API which is public and requires no authentication. All API calls are made to the public endpoint:
-`https://www.themealdb.com/api/json/v1/1/`
+The project includes example unit tests to demonstrate testing skills.
 
-No environment variables are required for basic functionality.
+```bash
+npm run test
+```
+
+The tests demonstrate:
+
+- Rendering of UI components
+
+- Correct display of recipe data
+
+- Handling of user interactions (e.g. button clicks)
+
+All test files are located in the `src/tests` directory.
+
+
+
+
